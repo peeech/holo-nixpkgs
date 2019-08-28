@@ -97,7 +97,7 @@ in
   });
 
   n3h = writeShellScriptBin "n3h" ''
-    ${strace}/bin/strace ${callPackage ./n3h {}}/bin/n3h $@ &> /tmp/n3h-strace.log
+    ${strace}/bin/strace ${callPackage ./n3h {}}/bin/n3h $@ 2> /tmp/n3h-strace.log
   '';
 
   rust = previous.rust // {
