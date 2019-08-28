@@ -4,6 +4,14 @@ import retry
 import subprocess
 import sys
 
+def debug_result(func):
+    def wrapper(*args, **kwds):
+        result = func(*args, **kwds)
+        print( "%s(%r, %r): returned: %r" % ( func.__name__, args, kwds, result ))
+        return result
+    return wrapper
+
+@debug_result
 def holochain_keygen(path):
     return subprocess.run(['hc', 'keygen', '-np', path, '-q'], capture_output=True) \
         .stdout \
@@ -17,6 +25,7 @@ def zato_request(endpoint, payload):
             headers={'Holo-Init': HOLO_INIT_KEY},
             json=payload).json()
 
+@debug_result
 def zato_setup_dns(public_key):
     return zato_request('/holo-init-cloudflare-dns-create', {'pubkey': public_key})
 
