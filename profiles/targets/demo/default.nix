@@ -60,6 +60,7 @@ in
       network = {
         n3h_persistance_path = "${conductorHome}/.n3h";
         type = "n3h";
+        bootstrap_nodes = [];
       };
       persistence_dir = conductorHome;
       signing_service_uri = "http://localhost:8888";
