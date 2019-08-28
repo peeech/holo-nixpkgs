@@ -58,7 +58,7 @@ in
       dnas = map dnaConfig hApps;
       instances = map instanceConfig hApps;
       network = {
-        n3h_persistance_path = "${conductorHome}/n3h";
+        n3h_persistance_path = "${conductorHome}/.n3h";
         type = "n3h";
       };
       persistence_dir = conductorHome;
