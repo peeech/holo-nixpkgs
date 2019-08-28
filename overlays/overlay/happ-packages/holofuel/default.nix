@@ -2,9 +2,9 @@
 
 let
   src = fetchurl {
-    url = "https://holo-host.github.io/holofuel/releases/download/0.9.6-alpha1/QmQHb3XZeV4YMnCrajrngo9mbgaVqndoGY1cuuqhh1aeTq.holofuel.dna.json";
+    url = "https://holo-host.github.io/holofuel/releases/download/0.9.7-alpha1/holofuel.dna.json";
     name = "holofuel.dna.json";
-    sha256 = "16xc1lavd42rasw45zyd5acvp2n1qhrpc7imgqjiw6240apjvl15";
+    sha256 = "0cgl88izvj4gnjvv21j8fz0fax3l45gmf0iqnhd64qpdgsb2ihah";
   };
 in
 

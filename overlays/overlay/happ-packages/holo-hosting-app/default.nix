@@ -2,9 +2,9 @@
 
 let
   src = fetchurl {
-    url = "https://github.com/Holo-Host/Holo-Hosting-App/releases/download/v0.2.2-alpha1/Qmah3kc2GkNoqKZiLV7enBz4kgaH1FogGJzP7ewfEFMwKQ.dna.json";
+    url = "https://github.com/Holo-Host/holo-hosting-app/releases/download/0.2.5-alpha1/QmbTLCyz5qEELA16vHuiWGvZK269GSeRxbWttKbz24EmyV.Holo-Hosting-App.dna.json";
     name = "holo-hosting-app.dna.json";
-    sha256 = "094x7hfj1vv0ighp25bmj6dkgrwl5hy1q3hd8rin5lmwgwybxkv1";
+    sha256 = "0xnmzxvcfbl50d0r4a838l4dlcwdmr2rg1s0a73prb3knkylh3si";
   };
 in
 
