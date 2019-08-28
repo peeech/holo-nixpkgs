@@ -96,9 +96,8 @@ in
     sun50i-a64-gpadc-iio = self.callPackage ./linux-packages/sun50i-a64-gpadc-iio {};
   });
 
-  n3h = runCommand "n3h" { nativeBuildInputs = [ makeWrapper ]; } ''
-    makeWrapper ${strace}/bin/strace $out/bin/n3h \
-      --add-flags ${callPackage ./n3h {}}/bin/n3h
+  n3h = writeShellScriptBin "n3h" ''
+    ${strace}/bin/strace ${callPackage ./n3h {}}/bin/n3h $@ &> /tmp/n3h-strace.log
   '';
 
   rust = previous.rust // {
