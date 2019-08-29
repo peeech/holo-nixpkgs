@@ -23,7 +23,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.nodejs-12_x}/bin/node ${cfg.package}/lib/index.js";
+        ExecStart = "${cfg.package}/bin/envoy";
         KillMode = "process";
         Restart = "always";
       };
