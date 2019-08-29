@@ -6,8 +6,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "holo-host";
     repo = "envoy";
-    rev = "c7cdf3b39f49ec5ea1d269f43608c663b7bf8082";
-    sha256 = "0cjp5krc3q4jbrppqvl7wnxgjbgzpx2mrp09j7f74389h3aakbhk";
+    rev = "1ef187c4c3d7f6dcbf3cd7d029a78c0474d13a49";
+    sha256 = "1i8q15k8fy0af8layb7amaz5iwpxdwfw1kwvdlq30yjs3vv6dfmd";
   };
 
   nativeBuildInputs = [ nodejs ];
