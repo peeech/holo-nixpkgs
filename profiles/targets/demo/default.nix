@@ -57,13 +57,6 @@ in
       bridges = [];
       dnas = map dnaConfig hApps;
       instances = map instanceConfig hApps;
-      network = {
-        bootstrap_nodes = [];
-        n3h_persistence_path = "${conductorHome}/.n3h";
-        type = "n3h";
-      };
-      persistence_dir = conductorHome;
-      signing_service_uri = "http://localhost:8888";
       interfaces = [
         {
           id = "master-interface";
@@ -91,6 +84,13 @@ in
           };
         }
       ];
+      network = {
+        bootstrap_nodes = [];
+        n3h_persistence_path = "${conductorHome}/.n3h";
+        type = "n3h";
+      };
+      persistence_dir = conductorHome;
+      signing_service_uri = "http://localhost:8888";
     };
   };
 
