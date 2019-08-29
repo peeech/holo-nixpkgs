@@ -71,7 +71,7 @@ in
           instances = map (drv: { id = drv.name; }) hApps;
         }
         {
-          id = "internal-interface-1";
+          id = "internal-interface";
           admin = false;
           driver = {
             port = 2222;
@@ -79,7 +79,7 @@ in
           };
         }
         {
-          id = "internal-interface-2";
+          id = "public-interface";
           admin = false;
           driver = {
             port = 3333;
