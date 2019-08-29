@@ -18,8 +18,8 @@ let
   holo-envoy = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "envoy";
-    rev = "5667c5ae6b3e1a36e4b1757f8118d18c34df5e32";
-    sha256 = "0bvr2lag2wjbw03jblabg18x655skcpqiqbygf52229gvkyjnlbh";
+    rev = "52b0b34907474ef39f123c855ed6caae89b63396";
+    sha256 = "0648bmv33cmb53ppn3ph44v52yx19qd6nnjskgmkyk05xmgd391y";
   };
 
   holochain-rust = fetchFromGitHub {
