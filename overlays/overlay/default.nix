@@ -67,6 +67,10 @@ in
 
   extlinux-conf-builder = callPackage ./extlinux-conf-builder {};
 
+  holo-cli = callPackage ./holo-cli {
+    nodejs = nodejs-12_x;
+  };
+
   inherit (callPackage holo-envoy {}) holo-envoy;
   inherit (holochainRust) holochain-cli holochain-conductor;
 
