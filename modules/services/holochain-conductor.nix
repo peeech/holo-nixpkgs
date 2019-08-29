@@ -45,12 +45,12 @@ in
 
       preStart = ''
         mkdir -p ${cfg.config.network.n3h_persistence_path}
-        cat ${toml} > ${home}/config.toml
-        sed -i s/@public_key@/$(cat ${home}/holoportos-key.pub)/ ${home}/config.toml
+        cat ${toml} > ${home}/conductor-config.toml
+        sed -i s/@public_key@/$(cat ${home}/holoportos-key.pub)/ ${home}/conductor-config.toml
       '';
     
       serviceConfig = {
-        ExecStart = "${cfg.package}/bin/holochain -c ${home}/config.toml";
+        ExecStart = "${cfg.package}/bin/holochain -c ${home}/conductor-config.toml";
         KillMode = "process";
         Restart = "always";
         User = "holochain-conductor";
