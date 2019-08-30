@@ -20,12 +20,14 @@ let
       inherit (nixos.config.system) build;
       inherit (nixos.config.nixpkgs.hostPlatform) system;
 
-      image = if build ? "isoImage"
-        then build.isoImage
-        else if build ? "sdImage"
-        then build.sdImage
+      image = if build ? "vm"
+        then build.vm
         else if build ? "virtualBoxOVA"
         then build.virtualBoxOVA
+        else if build ? "sdImage"
+        then build.sdImage
+        else if build ? "isoImage"
+        then build.isoImage
         else throw "${build} doesn't expose any known image format";
 
       stopgap = drv: if allowCross
@@ -60,6 +62,7 @@ in
       holoport-plus = mkImage ./profiles/installers/holoport-plus;
     };
     targets = recurseIntoAttrs {
+      qemu = mkImage ./profiles/targets/qemu;
       virtualbox = mkImage ./profiles/targets/virtualbox;
     };
   };
