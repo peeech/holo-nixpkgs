@@ -19,8 +19,6 @@ stdenvNoCC.mkDerivation {
     }
   '';
 
-  buildInputs = [ ((nixos {}).nixos-rebuild) ];
-
   NIX_PATH = builtins.concatStringsSep ":" [
     "holo-nixpkgs=${root}"
     "nixpkgs=${pkgs.path}"
