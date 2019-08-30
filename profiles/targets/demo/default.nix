@@ -42,6 +42,7 @@ in
   environment.systemPackages = [
     pkgs.holo-cli
     pkgs.holoportos-initialize
+    pkgs.holofuel-demo-configure
   ];
 
   networking.firewall.allowedTCPPorts = [ 1111 2222 3333 8800 8880 8888 48080 ];
