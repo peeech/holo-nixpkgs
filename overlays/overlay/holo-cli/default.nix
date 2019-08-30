@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
     owner = "Holo-Host";
     repo = "node-holo-cli";
     rev = "653dca686e60af480318635450bb1b092d75f6a2";
-    sha256 = "03m0d1s5ss762g0kh0qg9jrpgvdicwwikrk70h1gskzqzl0azam0";
+    sha256 = "15yafq4g5w0lpl3pmqvplyjdwr7rb3dj0g5gv3zd1w9r0bbw3g0n";
   };
 
   nativeBuildInputs = [ nodejs ];
