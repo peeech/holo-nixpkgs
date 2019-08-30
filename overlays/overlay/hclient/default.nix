@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
   '';
 
   buildPhase = ''
-      node_modules/typescript/bin/tsc -d
+    node_modules/typescript/bin/tsc -d
   '';
 
   installPhase = ''
