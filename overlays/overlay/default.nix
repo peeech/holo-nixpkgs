@@ -66,7 +66,9 @@ in
   aurora-led = callPackage ./aurora-led {};
 
   extlinux-conf-builder = callPackage ./extlinux-conf-builder {};
-
+  
+  hclient = callPackage ./hclient {};
+   
   holo-cli = callPackage ./holo-cli {
     nodejs = nodejs-12_x;
   };
