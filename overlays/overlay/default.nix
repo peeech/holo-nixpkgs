@@ -15,6 +15,8 @@ let
     sha256 = "1lz09rmr2yza8bv46ff49226jls6q1rl2x0p11q1940rw4k4bwa9";
   };
 
+  # To use a locally checked out
+  #holo-envoy = gitignoreSource ../../../envoy;
   holo-envoy = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "envoy";
@@ -111,6 +113,8 @@ in
   });
 
   n3h = callPackage ./n3h {};
+
+  holofuel-demo-configure = callPackage ./holofuel-demo-configure {};
 
   rust = previous.rust // {
     packages = previous.rust.packages // {
