@@ -42,6 +42,7 @@ in
   environment.systemPackages = [
     pkgs.holo-cli
     pkgs.holoportos-initialize
+    pkgs.emacs
     pkgs.holofuel-demo-configure
   ];
 
