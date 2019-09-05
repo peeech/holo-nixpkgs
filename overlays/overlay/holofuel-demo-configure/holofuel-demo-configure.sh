@@ -116,3 +116,5 @@ holo admin interface
 # Finally, link the HoloFuel UI (provided by an environment variable) from the envoy UI dir,
 # at the hApp provider's hash
 ln -fs ${HOLOFUEL_APP_UI_PATH} ${HOLOENVOY_UIS_DIR}/${HOLOFUEL_HAPPPROVI_HASH}
+
+echo "HoloFuel UI activated: http://${HOLOFUEL_HAPPPROVI_HASH}.${PUBKEY}.holo.host"
