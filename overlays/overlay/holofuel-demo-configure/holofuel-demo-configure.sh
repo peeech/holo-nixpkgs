@@ -117,4 +117,4 @@ holo admin interface
 # at the hApp provider's hash
 ln -fs ${HOLOFUEL_APP_UI_PATH} ${HOLOENVOY_UIS_DIR}/${HOLOFUEL_HAPPPROVI_HASH}
 
-echo "HoloFuel UI activated: http://${HOLOFUEL_HAPPPROVI_HASH}.${PUBKEY}.holo.host"
+echo "HoloFuel UI activated: http://${HOLOFUEL_HAPPPROVI_HASH}.${PUBKEY}.holohost.net"
