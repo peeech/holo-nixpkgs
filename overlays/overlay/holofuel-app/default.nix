@@ -1,12 +1,12 @@
-{ stdenv, fetchFromGitHub, nodejs, npmToNix }:
+{ stdenv, fetchFromGitHub, nodejs, npmToNix, hclient }:
 
 stdenv.mkDerivation rec {
   name = "holofuel-app";
 
   src = fetchFromGitHub {
-    owner = "samrose";
+    owner = "mjbrisebois";
     repo = "holofuel-app";
-    rev = "9e2cb4c88964028ca765b30f97bf8f79a16ab17b";
+    rev = "e12b5327000373c270d2f5cd067808e0df10cb50";
     sha256 = "0xf920v0xl2mxqah8s98fh0y55ck1wzl6i5rma0l9hhxd0m1amkr";
   };
 
@@ -18,7 +18,10 @@ stdenv.mkDerivation rec {
     patchShebangs node_modules
   '';
 
-  buildPhase = ":";
+  buildPhase = ''
+    ln -fs ${hclient}/hClient.js js/
+    node node_modules/webpack/bin/webpack.js
+  '';
 
   installPhase = ''
     mkdir $out

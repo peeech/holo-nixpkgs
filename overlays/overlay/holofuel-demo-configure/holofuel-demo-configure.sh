@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# HOLOFUEL_APP_UI_PATH is an environment variable that contains the target UI directory
+
 EMAIL=example@example.com
 HOLOFUEL_DNA_FILE=https://holo-host.github.io/holofuel/releases/download/0.9.7-alpha1/holofuel.dna.json 
 HOLOFUEL_DNA_HASH=QmcqAKFLP6WrjWghWVzrgnoa72EWu211C7Fu2F1FwRMU1k
@@ -110,5 +112,7 @@ holo admin instance
 
 echo "Done; Available interfaces: "
 holo admin interface
-    
 
+# Finally, link the HoloFuel UI (provided by an environment variable) from the envoy UI dir,
+# at the hApp provider's hash
+ln -fs ${HOLOFUEL_APP_UI_PATH} ${HOLOENVOY_UIS_DIR}/${HOLOFUEL_HAPPPROVI_HASH}
