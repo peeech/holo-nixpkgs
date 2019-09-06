@@ -99,6 +99,26 @@ in
     };
   };
 
+  services.nginx = {
+    enable = true;
+    virtualHosts.hydra-example-0 = {
+      root = ./hydra-example;
+      serverName = "www.hydra-example.holohost.net";
+    };
+    virtualHosts.hydra-example-1 = {
+      root = ./hydra-example;
+      serverName = "www.hydra.holohost.net";
+    };
+    virtualHosts.hydra-example-2 = {
+      root = ./hydra-example;
+      serverName = "www.xn--hydr-83d.holohost.net";
+    };
+    virtualHosts.hydra-example-3 = {
+      root = ./hydra-example;
+      serverName = "www.xn--hdra-v6d.example.holohost.net";
+    };
+  };
+
   system.holoportos.network = "test";
 
   users.users.root.openssh.authorizedKeys.keys = [
