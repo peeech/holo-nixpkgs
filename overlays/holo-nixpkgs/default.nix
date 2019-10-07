@@ -28,8 +28,8 @@ let
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
-    rev = "0c887a90a6f6d2f0630da3063cbf208c16afb22e";
-    sha256 = "0si6q3486zp6kg081dhgpwfy26y5gb5mx09awp06kr3cr9xvsrxi";
+    rev = "a026a71306f8348a4882f0a7c3248bc06d7d0184";
+    sha256 = "0r7f3144g38wmr8hxqqv4mcl1lclx3d7chincazw1c602miqgsm2";
   };
 
   holochainRust = callPackage holochain-rust {};
