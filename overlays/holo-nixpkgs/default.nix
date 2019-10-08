@@ -14,8 +14,8 @@ let
   gitignore = fetchFromGitHub {
     owner = "hercules-ci";
     repo = "gitignore";
-    rev = "6e7569637d699facfdcde91ab5c94bac06d39edc";
-    sha256 = "1lz09rmr2yza8bv46ff49226jls6q1rl2x0p11q1940rw4k4bwa9";
+    rev = "f9e996052b5af4032fe6150bba4a6fe4f7b9d698";
+    sha256 = "0jrh5ghisaqdd0vldbywags20m2cxpkbbk5jjjmwaw0gr8nhsafv";
   };
 
   holo-envoy = fetchFromGitHub {
