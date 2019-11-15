@@ -50,6 +50,7 @@ rustPlatform.buildRustPackage ({
   nativeBuildInputs = nativeBuildInputs ++ [
     holochainRust.holochain-cli
     holochainRust.holochain-conductor
+    holochainRust.sim2h-server
     jq
     lld
     n3h
