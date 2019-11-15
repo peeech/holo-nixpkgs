@@ -1,5 +1,5 @@
 { stdenv, callPackage, cargoToNix, gitignoreSource, npmToNix, runCommand
-, rustPlatform, holochain-cli, jq, lld, n3h, nodejs, python2, which }:
+, rustPlatform, holochain-cli, jq, lld, n3h, nodejs-12_x, python2, which }:
 { name, src, nativeBuildInputs ? [], doCheck ? true, shell ? false }:
 
 with stdenv.lib;
@@ -54,7 +54,7 @@ rustPlatform.buildRustPackage ({
     jq
     lld
     n3h
-    nodejs
+    nodejs-12_x
     python2
     which
   ];
@@ -84,7 +84,12 @@ rustPlatform.buildRustPackage ({
     runHook preCheck
   '' + optionalString (pathExists (stripContext testDir)) ''
     cp -r ${npmToNix { src = testDir; }} test/node_modules
-    hc test
+    # DNA tests default to use a sim2h server on localhost:9000, and are often
+    # NodeJS "tape" tests, so filter output accordingly, if "faucet" is available.
+    # Also, dump any debug logging output, as we simply want success/failure here...
+    sim2h_server -p 9000 &
+    hc test 2>/dev/null \
+        | ( ${nodejs-12_x}/bin/node test/node_modules/faucet/bin/cmd.js || cat )
   '' + ''
     runHook postCheck
   '';
