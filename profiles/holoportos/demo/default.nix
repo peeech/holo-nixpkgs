@@ -10,6 +10,7 @@ let
     holo-hosting-app
     holofuel
     servicelogger
+    happ-example
   ];
 
   dnaConfig = drv: {

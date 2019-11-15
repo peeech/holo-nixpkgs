@@ -118,7 +118,7 @@ in
   '');
 
   dnaPackages = recurseIntoAttrs {
-    example-happ = callPackage ./dna-packages/example-happ {};
+    happ-example = callPackage ./dna-packages/happ-example {};
     happ-store = callPackage ./dna-packages/happ-store {};
     holo-hosting-app = callPackage ./dna-packages/holo-hosting-app {};
     holofuel = callPackage ./dna-packages/holofuel {};
