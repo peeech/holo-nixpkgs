@@ -35,8 +35,8 @@ let
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
-    rev = "8658f4a0021d368163e9eae791cec280cb4325b2";
-    sha256 = "05nk5v2xgbl8kqjhns3nchjnh3y4qammz3pvhvca4kvbmvqgya99";
+    rev = "7c8d7b9f7734b546ce14f54db9307709f683a137";
+    sha256 = "16d94zv616s93jsma7r651cmpkxfwbda3km5fi30w592ypl0c9lz";
   };
 
   holochainRust = callPackage holochain-rust {};
@@ -130,7 +130,7 @@ in
   extlinux-conf-builder = callPackage ./extlinux-conf-builder {};
 
   inherit (callPackage holo-envoy {}) holo-envoy;
-  inherit (holochainRust) holochain-cli holochain-conductor;
+  inherit (holochainRust) holochain-cli holochain-conductor sim2h-server;
 
   hclient = callPackage ./hclient {};
 
