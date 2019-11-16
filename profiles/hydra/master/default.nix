@@ -100,6 +100,13 @@ in
         }
       '';
     };
+
+    virtualHosts.hpstatus = {
+      enableACME = true;
+      forceSSL = true;
+      root = pkgs.hpstatus;
+      serverName = "hpstatus.holo.host";
+    };
   };
 
   systemd.tmpfiles.rules = [
