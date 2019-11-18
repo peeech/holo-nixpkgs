@@ -84,9 +84,6 @@ rustPlatform.buildRustPackage ({
     runHook preCheck
   '' + optionalString (pathExists (stripContext testDir)) ''
     cp -r ${npmToNix { src = testDir; }} test/node_modules
-    # DNA tests default to use a sim2h server on localhost:9000, and are often
-    # NodeJS "tape" tests, so filter output accordingly, if "faucet" is available.
-    # Also, dump any debug logging output, as we simply want success/failure here...
     sim2h_server -p 9000 &
     hc test 2>/dev/null \
         | ( ${nodejs-12_x}/bin/node test/node_modules/faucet/bin/cmd.js || cat )
