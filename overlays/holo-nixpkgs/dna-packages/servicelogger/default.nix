@@ -2,10 +2,10 @@
 
 let
   src = fetchFromGitHub {
-    owner = "holo-host";
+    owner = "Holo-Host";
     repo = "servicelogger";
-    rev = "05905b2ea2af61b8c9fe2000215fd403d2398857";
-    sha256 = "0ksq5aqzz32g20n235h71cwpjl8j4ih28s103fl5chzk4yj3iac9";
+    rev = "373af9e889a70594d07a4979b92821eca03e2ab5";
+    sha256 = "1kb2nw7wrhbcchxz0y2gs6zsqvi4cy1l2sfn0mphx6p28rqmwacl";
   };
 in
 
