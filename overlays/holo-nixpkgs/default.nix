@@ -39,6 +39,14 @@ let
     sha256 = "0648bmv33cmb53ppn3ph44v52yx19qd6nnjskgmkyk05xmgd391y";
   };
 
+
+  holo-monitor = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "holo-monitor";
+    rev = "a38879674d94b5150d3d48d40ae07e9a0f5bed8b";
+    sha256 = "13k8akqk35vk7qk6daa23bhi7556gb1zb07gk6z4arwxdla53nbx";
+  };
+
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
@@ -69,6 +77,8 @@ in
     holo-config-derive
     holo-config-generate-cli
     holo-config-generate-web;
+
+  inherit (callPackage holo-monitor {}) holo-monitor;
 
   inherit hpstatus;
   inherit (callPackage npm-to-nix {}) npmToNix;
@@ -168,7 +178,7 @@ in
   holo-nixpkgs-tests = recurseIntoAttrs (import ../../tests {
     inherit pkgs;
   });
- 
+
   holoportos = recurseIntoAttrs {
     profile = tryDefault <nixos-config> ../../profiles/holoportos;
 
