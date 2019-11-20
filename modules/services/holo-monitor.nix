@@ -29,8 +29,7 @@ in
         wantedBy = [ "multi-user.target" ];
 
         serviceConfig = {
-          ExecStart ="${pkgs.nodejs-12_x}/bin/node ./src/main.js";
-          /* ExecStart = "${pkgs.nodejs-12_x}/bin/node ${cfg.package}/src/main.js"; */
+          ExecStart = "${pkgs.nodejs-12_x}/bin/node ${pkgs.holo-monitor}/src/main.js";
           KillMode = "process";
           Restart = "always";
         };

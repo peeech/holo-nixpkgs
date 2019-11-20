@@ -30,7 +30,7 @@ in
 {
   imports = [ ../. ];
 
-
+  environment.systemPackages = [ pkgs.holo-monitor ];
   services.holo-monitor.enable = true;
 
   services.holochain-conductor = {
