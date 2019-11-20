@@ -6,6 +6,7 @@
   imports = [
     ./boot/generic-extlinux-compatible.nix
     ./services/holo-envoy.nix
+    ./services/holo-monitor.nix
     ./services/holochain-conductor.nix
     ./system/holoportos.nix
     ./system/holoportos/auto-upgrade.nix

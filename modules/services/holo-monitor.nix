@@ -1,0 +1,40 @@
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  cfg = config.services.holo-monitor;
+in
+
+{
+  options.services.holo-monitor = {
+    enable = mkEnableOption "Holo Monitor";
+
+    package = mkOption {
+      default = pkgs.holo-monitor;
+      type = types.package;
+    };
+  };
+
+  config = mkIf cfg.enable {
+  systemd = {
+    timers.holo-monitor = {
+      wantedBy = [ "timers.target" ];
+      partOf = [ "holo-monitor.service" ];
+      timerConfig.OnCalendar = "*:0/05";
+    };
+    services.holo-monitor = {
+        after = [ "network.target" "holochain-conductor.service" ];
+        path = [ config.services.holochain-conductor.package ];
+        wantedBy = [ "multi-user.target" ];
+
+        serviceConfig = {
+          ExecStart ="${pkgs.nodejs-12_x}/bin/node ./src/main.js";
+          /* ExecStart = "${pkgs.nodejs-12_x}/bin/node ${cfg.package}/src/main.js"; */
+          KillMode = "process";
+          Restart = "always";
+        };
+      };
+   };
+  };
+}
