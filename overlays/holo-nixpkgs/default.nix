@@ -43,8 +43,8 @@ let
   holo-monitor = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "holo-monitor";
-    rev = "a38879674d94b5150d3d48d40ae07e9a0f5bed8b";
-    sha256 = "13k8akqk35vk7qk6daa23bhi7556gb1zb07gk6z4arwxdla53nbx";
+    rev = "02653f1ac3a58e3018d012c3b9dee4cf927d452a";
+    sha256 = "12qmckw144j0a6vsgxhih4mbmis941mdg71wv7l0mgcjl08a5jx5";
   };
 
   holochain-rust = fetchFromGitHub {

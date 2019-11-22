@@ -21,7 +21,7 @@ in
     timers.holo-monitor = {
       wantedBy = [ "timers.target" ];
       partOf = [ "holo-monitor.service" ];
-      timerConfig.OnCalendar = "*:0/05";
+      timerConfig.OnCalendar = "*:0/10";
     };
     services.holo-monitor = {
         after = [ "network.target" "holochain-conductor.service" ];
@@ -29,6 +29,7 @@ in
         wantedBy = [ "multi-user.target" ];
 
         serviceConfig = {
+          EnvironmentFile="./.env";
           ExecStart = "${pkgs.nodejs-12_x}/bin/node ${pkgs.holo-monitor}/src/main.js";
           KillMode = "process";
           Restart = "always";
