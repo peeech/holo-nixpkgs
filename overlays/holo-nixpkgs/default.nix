@@ -18,20 +18,6 @@ let
     sha256 = "0jrh5ghisaqdd0vldbywags20m2cxpkbbk5jjjmwaw0gr8nhsafv";
   };
 
-  holo-config = fetchFromGitHub {
-    owner = "Holo-Host";
-    repo = "holo-config";
-    rev = "a7fae5926f2c8b6bb26111863873dc3ca55b2b6c";
-    sha256 = "1lcvnb93ayb593xgyd8ylwaldmh1s2vp28g7ydgmh598y81ljp57";
-  };
-
-  hpstatus = fetchFromGitHub {
-    owner = "Holo-Host";
-    repo = "hpstatus";
-    rev = "005435217305f76f3d51722f462f310a2baeab11";
-    sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
-  };
-
   holo-envoy = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "envoy";
@@ -47,6 +33,20 @@ let
   };
 
   holochainRust = callPackage holochain-rust {};
+
+  hpos-state = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "hpos-state";
+    rev = "bdb23a5f748ca77875e26103a92dbe95c27ee2c8";
+    sha256 = "0if7j38pxb1vll9g326ra27d0fnkflclbmg3spjdmyyhb779xgiz";
+  };
+
+  hpstatus = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "hpstatus";
+    rev = "005435217305f76f3d51722f462f310a2baeab11";
+    sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
+  };
 
   nixpkgs-mozilla = fetchTarball {
     url = "https://github.com/mozilla/nixpkgs-mozilla/archive/dea7b9908e150a08541680462fe9540f39f2bceb.tar.gz";
@@ -65,10 +65,10 @@ in
   inherit (callPackage cargo-to-nix {}) buildRustPackage cargoToNix;
   inherit (callPackage gitignore {}) gitignoreSource;
 
-  inherit (callPackage holo-config {})
-    holo-config-derive
-    holo-config-generate-cli
-    holo-config-generate-web;
+  inherit (callPackage hpos-state {})
+    hpos-state-derive-keystore
+    hpos-state-gen-cli
+    hpos-state-gen-web;
 
   inherit hpstatus;
   inherit (callPackage npm-to-nix {}) npmToNix;
@@ -181,6 +181,11 @@ in
     };
   };
 
+  hpos-admin = callPackage ./hpos-admin {
+    stdenv = stdenvNoCC;
+    python3 = python3.withPackages (ps: [ ps.flask ps.gevent ]);
+  };
+
   holoportos-install = callPackage ./holoportos-install {};
 
   holoportos-led-daemon = callPackage ./holoportos-led-daemon {};
@@ -230,4 +235,11 @@ in
       };
     };
   };
+
+  zerotierone = previous.zerotierone.overrideAttrs (super: {
+    meta = with lib; super.meta // {
+      platforms = platforms.linux;
+      license = licenses.free;
+    };
+  });
 }
