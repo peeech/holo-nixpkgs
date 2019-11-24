@@ -4,8 +4,8 @@ let
   src = fetchFromGitHub {
     owner = "holo-host";
     repo = "happ-example";
-    rev = "086f349d524bb020b5cd11097a2bc393986f141d";
-    sha256 = "09x0p7ysbw077cgnmv50mllzdh3b9930klqqjh9lpmq82ss0liak";
+    rev = "ef7bb20af2122f8f0920d844109f93bf635b2307";
+    sha256 = "1mmhf0ha7gcbmzg4as2nsc4d2k7qk5vywp7rppcmwwzdr5a473hz";
   };
 in
 
