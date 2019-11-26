@@ -11,6 +11,13 @@ let
     sha256 = "1rcwpaj64fwz1mwvh9ir04a30ssg35ni41ijv9bq942pskagf1gl";
   };
 
+  chaperone = fetchFromGitHub {
+    owner = "holo-host";
+    repo = "chaperone";
+    rev = "2386e905dc60dbb2bff482b92d5fbeb418627931";
+    sha256 = "02yxlqcgly3235pj6rb84px1my3ps3m5plk0nijazpiakndh2nxz";
+  };
+
   gitignore = fetchFromGitHub {
     owner = "hercules-ci";
     repo = "gitignore";
@@ -25,6 +32,13 @@ let
     sha256 = "0648bmv33cmb53ppn3ph44v52yx19qd6nnjskgmkyk05xmgd391y";
   };
 
+  holo-router = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "holo-router";
+    rev = "66b2dd874997b1f5739ab15244b14cb58f303444";
+    sha256 = "0ap3ij1ig6qwd7b4f0xlmgx5221ysdpy7ig2wgcqrh5djylzgzrm";
+  };
+
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
@@ -34,18 +48,18 @@ let
 
   holochainRust = callPackage holochain-rust {};
 
+  hp-admin = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "hp-admin";
+    rev = "4ae0f0cc28e199a5d8f4d23f2aa508aae2cf5111";
+    sha256 = "1abna46da9av059kfy10ls0fa6ph8vhh75rh8cv3mvi96m2n06zd";
+  };
+
   hpos-state = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hpos-state";
     rev = "bdb23a5f748ca77875e26103a92dbe95c27ee2c8";
     sha256 = "0if7j38pxb1vll9g326ra27d0fnkflclbmg3spjdmyyhb779xgiz";
-  };
-
-  hpstatus = fetchFromGitHub {
-    owner = "Holo-Host";
-    repo = "hpstatus";
-    rev = "005435217305f76f3d51722f462f310a2baeab11";
-    sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
   };
 
   nixpkgs-mozilla = fetchTarball {
@@ -62,16 +76,29 @@ let
 in
 
 {
-  inherit (callPackage cargo-to-nix {}) buildRustPackage cargoToNix;
+  inherit (callPackage cargo-to-nix {})
+    buildRustPackage
+    cargoToNix;
+
+  inherit (callPackage chaperone {}) chaperone;
+
   inherit (callPackage gitignore {}) gitignoreSource;
+
+  inherit (callPackage holo-router {})
+    holo-router-agent
+    holo-router-gateway;
+
+  inherit (callPackage hp-admin {})
+    hp-admin-ui
+    holofuel-ui;
 
   inherit (callPackage hpos-state {})
     hpos-state-derive-keystore
     hpos-state-gen-cli
     hpos-state-gen-web;
 
-  inherit hpstatus;
   inherit (callPackage npm-to-nix {}) npmToNix;
+
   inherit (callPackage "${nixpkgs-mozilla}/package-set.nix" {}) rustChannelOf;
 
   buildDNA = makeOverridable (callPackage ./build-dna {
@@ -135,6 +162,8 @@ in
 
   aurora-led = callPackage ./aurora-led {};
 
+  dnscrypt-proxy2 = callPackage ./dnscrypt-proxy2 {};
+
   extlinux-conf-builder = callPackage ./extlinux-conf-builder {};
 
   inherit (callPackage holo-envoy {}) holo-envoy;
@@ -142,7 +171,9 @@ in
 
   hclient = callPackage ./hclient {};
 
-  holofuel-app = callPackage ./holofuel-app {};
+  holofuel-app = callPackage ./holofuel-app {
+    nodejs = nodejs-12_x;
+  };
 
   holofuel-demo-configure = callPackage ./holofuel-demo-configure {};
 
@@ -157,11 +188,6 @@ in
     python3 = python3.withPackages (ps: [ ps.requests ]);
   };
 
-  holo-init = callPackage ./holo-init {
-    stdenv = stdenvNoCC;
-    python3 = python3.withPackages (ps: [ ps.requests ps.retry ]);
-  };
-
   # TODO: upstream to holochain-cli
   holo-keygen = callPackage ./holo-keygen {
     stdenv = stdenvNoCC;
@@ -170,7 +196,7 @@ in
   holo-nixpkgs-tests = recurseIntoAttrs (import ../../tests {
     inherit pkgs;
   });
- 
+
   holoportos = recurseIntoAttrs {
     profile = tryDefault <nixos-config> ../../profiles/holoportos;
 
@@ -183,14 +209,31 @@ in
     };
   };
 
+  holoportos-install = callPackage ./holoportos-install {};
+
+  holoportos-led-daemon = callPackage ./holoportos-led-daemon {};
+
   hpos-admin = callPackage ./hpos-admin {
     stdenv = stdenvNoCC;
     python3 = python3.withPackages (ps: [ ps.flask ps.gevent ]);
   };
 
-  holoportos-install = callPackage ./holoportos-install {};
+  hpos-admin-client = callPackage ./hpos-admin-client {
+    stdenv = stdenvNoCC;
+    python3 = python3.withPackages (ps: [ ps.click ps.requests ]);
+  };
 
-  holoportos-led-daemon = callPackage ./holoportos-led-daemon {};
+  hpos-init = callPackage ./hpos-init {
+    stdenv = stdenvNoCC;
+    python3 = python3.withPackages (ps: [ ps.magic-wormhole ]);
+  };
+
+  hpstatus = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "hpstatus";
+    rev = "005435217305f76f3d51722f462f310a2baeab11";
+    sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
+  };
 
   hydra = previous.hydra.overrideAttrs (super: {
     doCheck = false;

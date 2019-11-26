@@ -5,9 +5,13 @@
 
   imports = [
     ./boot/generic-extlinux-compatible.nix
+    ./services/dnscrypt-proxy2.nix
+    ./services/holo-auth-client.nix
     ./services/holo-envoy.nix
-    ./services/hpos-admin.nix
+    ./services/holo-router-agent.nix
+    ./services/holo-router-gateway.nix
     ./services/holochain-conductor.nix
+    ./services/hpos-admin.nix
     ./system/holoportos.nix
     ./system/holoportos/auto-upgrade.nix
     ./system/holoportos/install.nix

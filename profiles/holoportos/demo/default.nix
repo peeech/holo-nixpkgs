@@ -34,7 +34,6 @@ in
   imports = [ ../. ];
 
   environment.systemPackages = [
-    pkgs.holo-init
     pkgs.holo-keygen
     pkgs.hpos-state-gen-cli
     pkgs.holofuel-demo-configure
@@ -43,7 +42,6 @@ in
   networking.firewall.allowedTCPPorts = [ 1111 2222 3333 8800 8880 8888 48080 ];
 
   services.holo-envoy.enable = true;
-  services.hpos-admin.enable = true;
 
   services.holochain-conductor = {
     enable = true;
@@ -93,8 +91,6 @@ in
       ];
     };
   };
-
-  system.holoportos.network = "test";
 
   users.users.root.openssh.authorizedKeys.keys = lib.mkForce [
     # Matthew Brisebois

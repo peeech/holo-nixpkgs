@@ -11,6 +11,7 @@ in
     ../.
     ../binary-cache.nix
     ../self-aware.nix
+    ../zerotier.nix
   ];
 
   boot.loader.grub.splashImage = ./splash.png;
@@ -22,7 +23,10 @@ in
 
   environment.systemPackages = [
     (holoport-hardware-test.override { inherit target; })
+    udevil
   ];
+
+  networking.firewall.allowedTCPPorts = [ 443 ];
 
   networking.hostName = lib.mkOverride 1100 "holoportos";
 
@@ -42,18 +46,27 @@ in
       addresses = true;
     };
   };
+
+  services.devmon.enable = true;
+
+  services.holo-auth-client.enable = true;
+
+  services.holo-router-agent.enable = true;
  
+  services.hpos-admin.enable = true;
+
   services.mingetty.autologinUser = "root";
 
   services.openssh.enable = true;
 
-  services.zerotierone = {
+  services.nginx = {
     enable = true;
-    joinNetworks = {
-      dev = [ "8286ac0e47fdb6b5" ];
-      live = [];
-      test = [ "93afae5963c547f1" ];
-    }."${config.system.holoportos.network}";
+    virtualHosts.default = {
+      enableACME = true;
+      onlySSL = true;
+      locations."/".root = pkgs.singletonDir "${./index.html}";
+      serverName = "localhost";
+    };
   };
 
   system.holoportos.autoUpgrade = {
