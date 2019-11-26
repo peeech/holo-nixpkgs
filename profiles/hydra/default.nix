@@ -6,6 +6,8 @@
     ../self-aware.nix
   ];
 
+  environment.systemPackages = [ pkgs.hello ];
+
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   nix.gc = {
@@ -17,6 +19,11 @@
   programs.ssh.extraConfig = ''
     StrictHostKeyChecking accept-new
   '';
+
+  system.holoportos.autoUpgrade = {
+    enable = true;
+    dates = "*:0/10";
+  };
 
   time.timeZone = "UTC";
 
