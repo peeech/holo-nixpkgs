@@ -65,6 +65,7 @@ in
       enableACME = true;
       onlySSL = true;
       locations."/".root = pkgs.singletonDir "${./index.html}";
+      locations."/favicon.ico".root = pkgs.singletonDir "${./favicon.ico}";
       serverName = "localhost";
     };
   };
