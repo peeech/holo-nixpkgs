@@ -4,7 +4,6 @@
 # Configure the persistent HoloFuel demonstration
 # 
 
-HPOS_STATE_DIR=/var/lib
 
 # HOLOFUEL_APP_UI_PATH is an environment variable that contains the target UI directory
 
@@ -23,60 +22,20 @@ if [ "$(whoami)" != "root" ]; then
     exit 1
 fi
 
+HPOS_STATE_DIR=${HPOS_STATE_DIR:-/etc}
+HPOS_STATE=${HPOS_STATE_DIR}/hpos-state.json
+
 # 
-# 0) Create a Deterministic Holo Configuration
+# ) Deduce Holo's registered Admin email address from hpos-state.json config.
 # 
-# The Holo Admin password will be chosen at runtime, and displayed to the person running this
-# script.  It will be unique to this demo instance.
-#
-# TODO: generate password from /etc/machineid, so it is deterministic per-install
-#
-
-password-from-machine-id() {
-    # Take the hex /etc/machine-id, convert to base-6 dice rolls on single lines, generate a
-    # password like "some-words", break output into single-line words at whitespace, and collect it
-    # from the last word output.
-    echo "ibase=16; obase=6; $( tr '[a-z]' '[A-Z]' < /etc/machine-id )" | bc \
-	| sed 's/./&\n/g' \
-	| diceware --num 2 --no-caps -d - -r realdice \
-	| tr -s '[[:space:]]' '\n' \
-        | tail -1
-}
-
-EMAIL=perry.kundert+holofuel-demo@holo.host
-PASSWORD=$( password-from-machine-id )
-echo "Holo Admin Password:  ${PASSWORD} (derived from /etc/machine-id: $( cat /etc/machine-id ))"
-echo
-
-# If no configuration exists, generate a new one w/ seed entropy using /etc/machine-id
-# and the deterministic password
-echo "Holo Configuration:   ${HPOS_STATE_DIR}/hpos-state.json"
-if ! cat ${HPOS_STATE_DIR}/hpos-state.json 2>/dev/null \
-   && ! hpos-state-gen-cli \
-     --email "${EMAIL}" \
-     --password "${PASSWORD}" \
-     --seed-from "/etc/machine-id" \
-	| tee ${HPOS_STATE_DIR}/hpos-state.json; then
-    echo "Failed to locate/generate HoloPortOS state file"
+EMAIL=$( jq -r .v1.config.admin.email < ${HPOS_STATE} )
+if (( $? )) || [ -z "${EMAIL}" ]; then
+    echo "Unable to deduce Admin Email from ${HPOS_STATE}"
     exit 1
 fi
+echo "Holo Admin Email:     ${EMAIL} (from ${HPOS_STATE})"
+echo 
 
-#  
-# 1) Derive Holo, Zerotier, etc. identity keypairs
-# 
-# TODO: Derive these from seed entropy in holo.json configuration, in early systemd services
-# 
-
-KEY=/var/lib/holochain-conductor/holoportos-key
-
-if ! PUBKEY=$( cat ${KEY}.pub ); then
-    echo "HoloFuel Demo runng holo-init (eg. generate agent key) first."
-    systemctl stop holochain-conductor.service # stop, for memory and b/c it requires key to run
-    holo-init -v ${KEY} || ( echo "HoloFuel Demo failed to initialize Agent key"; exit 1 )
-    systemctl start holochain-conductor.service
-    PUBKEY=$( cat ${KEY}.pub )
-fi
-echo "Host Agent ID:        ${PUBKEY}"
 
 # 
 # 2) Start Holochain Conductor
@@ -181,7 +140,7 @@ holo admin dna
 # 8a) Also Install HoloFuel's ServiceLogger
 # 
 echo -n "Create ServiceLogger..."
-if ! holo admin init QmT9sisxtTXKGinCjcxp5nd1JhnbZDPru4sYJYXNSpM8U4 --service-logger servicelogger; then
+if ! holo admin init ${HOLOFUEL_HAPPSTORE_HASH} --service-logger servicelogger; then
     echo "Failed to init holoful hApp "
     exit 1
 fi
