@@ -2,9 +2,9 @@
 
 let
   src = fetchurl {
-    url = "https://github.com/holochain/happ-store/releases/download/v0.4.0-alpha1/hApp-store.dna.json";
+    url = "https://github.com/holochain/happ-store/releases/download/v0.4.1-alpha1/hApp-store.dna.json";
     name = "happ-store.dna.json";
-    sha256 = "07f1dkwmy2shklch858s1ia98cw1vdhsf4cbfnn7488zwbjj198z";
+    sha256 = "1y89q052y6nbm70akdb2qfbkc7yj73xla4qjw2lmk0b76g06l0r8";
   };
 in
 
