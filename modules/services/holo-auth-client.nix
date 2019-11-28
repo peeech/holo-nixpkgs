@@ -41,13 +41,18 @@ in
           sleep 1
         done
 
-        if [ "$(zerotier_status)" = "ACCESS_DENIED" ]; then
+        if [ "$(zerotier_status)" = "ACCESS_DENIED" ] \
+            || [ ! -s holo-keystore ] || [ ! -s holo-keystore.pub ]; then
+          # Not yet authorized w/ Zerotier, or the derived keystore is missing/empty
           export HPOS_STATE_PATH=$(hpos-init)
 
           mkdir -p /var/lib/holochain-conductor
           cd /var/lib/holochain-conductor
 
-          hpos-state-derive-keystore < $HPOS_STATE_PATH > holo-keystore 2> holo-keystore.pub
+          if ! hpos-state-derive-keystore < $HPOS_STATE_PATH > holo-keystore 2> holo-keystore.pub; then
+            echo 1>&2 "Failed to derive keys from $HPOS_STATE_PATH"
+            exit 1
+          fi
           export HOLO_PUBLIC_KEY=$(cat holo-keystore.pub)
 
           exec ${cfg.package}/bin/holo-auth-client
