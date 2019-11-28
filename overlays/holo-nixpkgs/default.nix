@@ -78,7 +78,8 @@ in
 {
   inherit (callPackage cargo-to-nix {})
     buildRustPackage
-    cargoToNix;
+    cargoToNix
+    ;
 
   inherit (callPackage chaperone {}) chaperone;
 
@@ -86,25 +87,30 @@ in
 
   inherit (callPackage holo-router {})
     holo-router-agent
-    holo-router-gateway;
+    holo-router-gateway
+    ;
 
   inherit (callPackage hp-admin {})
     hp-admin-ui
-    holofuel-ui;
+    holofuel-ui
+    ;
 
   inherit (callPackage hpos-state {})
     hpos-state-derive-keystore
     hpos-state-gen-cli
-    hpos-state-gen-web;
+    hpos-state-gen-web
+    ;
 
   inherit (callPackage npm-to-nix {}) npmToNix;
 
   inherit (callPackage "${nixpkgs-mozilla}/package-set.nix" {}) rustChannelOf;
 
-  buildDNA = makeOverridable (callPackage ./build-dna {
-    inherit (llvmPackages_8) lld;
-    inherit (rust.packages.nightly) rustPlatform;
-  });
+  buildDNA = makeOverridable (
+    callPackage ./build-dna {
+      inherit (llvmPackages_8) lld;
+      inherit (rust.packages.nightly) rustPlatform;
+    }
+  );
 
   buildHoloPortOS = hardware:
     buildImage [ holoportos.profile hardware ];
@@ -122,22 +128,22 @@ in
         "vm"
       ];
     in
-    head (attrVals imageNames system);
+      head (attrVals imageNames system);
 
   singletonDir = path:
     let
       drv = lib.toDerivation path;
     in
-    runCommand "singleton" {} ''
-      mkdir $out
-      ln -s ${path} $out/${drv.name}
-    '';
+      runCommand "singleton" {} ''
+        mkdir $out
+        ln -s ${path} $out/${drv.name}
+      '';
 
   tryDefault = x: default:
     let
       eval = builtins.tryEval x;
     in
-    if eval.success then eval.value else default;
+      if eval.success then eval.value else default;
 
   writeJSON = config: writeText "config.json" (builtins.toJSON config);
 
@@ -145,12 +151,14 @@ in
     ${remarshal}/bin/json2toml < ${writeJSON config} > $out
   '';
 
-  dnaHash = dna: builtins.readFile (runCommand "${dna.name}-hash" {} ''
-    ${holochain-cli}/bin/hc hash -p ${dna}/${dna.name}.dna.json \
-      | tail -1 \
-      | cut -d ' ' -f 3- \
-      | tr -d '\n' > $out
-  '');
+  dnaHash = dna: builtins.readFile (
+    runCommand "${dna.name}-hash" {} ''
+      ${holochain-cli}/bin/hc hash -p ${dna}/${dna.name}.dna.json \
+        | tail -1 \
+        | cut -d ' ' -f 3- \
+        | tr -d '\n' > $out
+    ''
+  );
 
   dnaPackages = recurseIntoAttrs {
     happ-example = callPackage ./dna-packages/happ-example {};
@@ -193,9 +201,11 @@ in
     stdenv = stdenvNoCC;
   };
 
-  holo-nixpkgs-tests = recurseIntoAttrs (import ../../tests {
-    inherit pkgs;
-  });
+  holo-nixpkgs-tests = recurseIntoAttrs (
+    import ../../tests {
+      inherit pkgs;
+    }
+  );
 
   holoportos = recurseIntoAttrs {
     profile = tryDefault <nixos-config> ../../profiles/holoportos;
@@ -235,25 +245,31 @@ in
     sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
   };
 
-  hydra = previous.hydra.overrideAttrs (super: {
-    doCheck = false;
-    patches = [
-      ./hydra/logo-vertical-align.diff
-      ./hydra/no-restrict-eval.diff
-    ];
-    meta = super.meta // {
-      hydraPlatforms = [ "x86_64-linux" ];
-    };
-  });
+  hydra = previous.hydra.overrideAttrs (
+    super: {
+      doCheck = false;
+      patches = [
+        ./hydra/logo-vertical-align.diff
+        ./hydra/no-restrict-eval.diff
+      ];
+      meta = super.meta // {
+        hydraPlatforms = [ "x86_64-linux" ];
+      };
+    }
+  );
 
-  libsodium = previous.libsodium.overrideAttrs (super: {
-    # Separate debug output breaks cross-compilation
-    separateDebugInfo = false;
-  });
+  libsodium = previous.libsodium.overrideAttrs (
+    super: {
+      # Separate debug output breaks cross-compilation
+      separateDebugInfo = false;
+    }
+  );
 
-  linuxPackages_latest = previous.linuxPackages_latest.extend (self: super: {
-    sun50i-a64-gpadc-iio = self.callPackage ./linux-packages/sun50i-a64-gpadc-iio {};
-  });
+  linuxPackages_latest = previous.linuxPackages_latest.extend (
+    self: super: {
+      sun50i-a64-gpadc-iio = self.callPackage ./linux-packages/sun50i-a64-gpadc-iio {};
+    }
+  );
 
   n3h = callPackage ./n3h {};
 
@@ -265,11 +281,13 @@ in
         };
 
         cargo = final.rust.packages.nightly.rustc;
-        rustc = (rustChannelOf {
-          channel = "nightly";
-          date = "2019-07-14";
-          sha256 = "1llbwkjkjis6rv0rbznwwl0j6bf80j38xgwsd4ilcf0qps4cvjsx";
-        }).rust.override {
+        rustc = (
+          rustChannelOf {
+            channel = "nightly";
+            date = "2019-07-14";
+            sha256 = "1llbwkjkjis6rv0rbznwwl0j6bf80j38xgwsd4ilcf0qps4cvjsx";
+          }
+        ).rust.override {
           targets = [
             "aarch64-unknown-linux-musl"
             "wasm32-unknown-unknown"
@@ -281,10 +299,12 @@ in
     };
   };
 
-  zerotierone = previous.zerotierone.overrideAttrs (super: {
-    meta = with lib; super.meta // {
-      platforms = platforms.linux;
-      license = licenses.free;
-    };
-  });
+  zerotierone = previous.zerotierone.overrideAttrs (
+    super: {
+      meta = with lib; super.meta // {
+        platforms = platforms.linux;
+        license = licenses.free;
+      };
+    }
+  );
 }

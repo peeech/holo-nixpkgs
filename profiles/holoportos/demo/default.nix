@@ -46,12 +46,14 @@ in
   services.holochain-conductor = {
     enable = true;
     config = {
-      agents = [{
-        id = "host-agent";
-        name = "Host Agent";
-        keystore_file = "${conductorHome}/holo";
-        public_address = "@public_key@";
-      }];
+      agents = [
+        {
+          id = "host-agent";
+          name = "Host Agent";
+          keystore_file = "${conductorHome}/holo";
+          public_address = "@public_key@";
+        }
+      ];
       bridges = [];
       dnas = map dnaConfig dnas;
       instances = map instanceConfig dnas;

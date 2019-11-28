@@ -12,7 +12,7 @@ makeTest {
       hpos-admin-client
       hpos-state-gen-cli
     ];
-    
+
     services.hpos-admin.enable = true;
 
     services.nginx = {

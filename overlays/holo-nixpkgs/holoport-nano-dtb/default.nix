@@ -2,8 +2,8 @@
 
 let
   cpp = if stdenv.buildPlatform == stdenv.hostPlatform
-    then "cpp"
-    else "${stdenv.hostPlatform.config}-cpp";
+  then "cpp"
+  else "${stdenv.hostPlatform.config}-cpp";
 in
 
 stdenv.mkDerivation {

@@ -7,12 +7,12 @@ let
   cfg = blcfg.generic-extlinux-compatible;
 
   dtbDirOpt = if cfg.dtbDir == null
-    then ""
-    else "-b ${cfg.dtbDir}";
+  then ""
+  else "-b ${cfg.dtbDir}";
 
   timeout = if blcfg.timeout == null
-    then -1
-    else blcfg.timeout;
+  then -1
+  else blcfg.timeout;
 in
 
 {
@@ -42,10 +42,10 @@ in
 
       dtbDir = mkOption {
         default = null;
-	description = ''
-	  Custom DTB source, if any.
-	'';
-	type = types.nullOr types.path;
+        description = ''
+          Custom DTB source, if any.
+        '';
+        type = types.nullOr types.path;
       };
     };
   };

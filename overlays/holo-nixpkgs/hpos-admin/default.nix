@@ -4,7 +4,7 @@ with stdenv.lib;
 
 stdenv.mkDerivation rec {
   name = "hpos-admin";
-	
+
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ python3 ];
 

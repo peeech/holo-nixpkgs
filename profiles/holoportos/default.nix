@@ -52,7 +52,7 @@ in
   services.holo-auth-client.enable = true;
 
   services.holo-router-agent.enable = true;
- 
+
   services.hpos-admin.enable = true;
 
   services.mingetty.autologinUser = "root";

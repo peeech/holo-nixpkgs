@@ -42,7 +42,7 @@ in
         cat ${pkgs.writeTOML cfg.config} > ${home}/conductor-config.toml
         sed -i s/@public_key@/$(cat ${home}/holo.pub)/ ${home}/conductor-config.toml
       '';
-    
+
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/holochain -c ${home}/conductor-config.toml";
         KillMode = "process";
@@ -50,7 +50,7 @@ in
         User = "holochain-conductor";
       };
     };
-    
+
     users.users.holochain-conductor = {
       createHome = true;
       home = "/var/lib/holochain-conductor";

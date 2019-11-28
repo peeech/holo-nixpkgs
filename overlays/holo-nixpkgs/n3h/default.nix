@@ -1,5 +1,16 @@
-{ stdenv, fetchurl, fetchgit, runCommand, writeTextFile, darwin, nodejs
-, python2, utillinux, autoconf, automake, libtool }:
+{ stdenv
+, fetchurl
+, fetchgit
+, runCommand
+, writeTextFile
+, darwin
+, nodejs
+, python2
+, utillinux
+, autoconf
+, automake
+, libtool
+}:
 
 let
   nodeEnv = import ./node-env.nix {
@@ -7,9 +18,11 @@ let
     libtool = darwin.cctools;
   };
 
-  globalBuildInputs = stdenv.lib.attrValues (import ./supplement.nix {
-    inherit nodeEnv fetchurl fetchgit;
-  });
+  globalBuildInputs = stdenv.lib.attrValues (
+    import ./supplement.nix {
+      inherit nodeEnv fetchurl fetchgit;
+    }
+  );
 
   # node2nix --nodejs10 -l package-lock.json --supplement-input supplement.json
   nodePackages = import ./node-packages.nix {
@@ -17,13 +30,15 @@ let
   };
 in
 
-nodePackages.package.overrideAttrs (super: {
-  nativeBuildInputs = (super.nativeBuildInputs or []) ++ [
-    autoconf
-    automake
-  ];
+nodePackages.package.overrideAttrs (
+  super: {
+    nativeBuildInputs = (super.nativeBuildInputs or []) ++ [
+      autoconf
+      automake
+    ];
 
-  buildInputs = (super.buildInputs or []) ++ [
-    libtool
-  ];
-})
+    buildInputs = (super.buildInputs or []) ++ [
+      libtool
+    ];
+  }
+)

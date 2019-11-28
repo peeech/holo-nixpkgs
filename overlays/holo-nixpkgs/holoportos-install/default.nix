@@ -1,5 +1,14 @@
-{ lib, gitignoreSource, runCommand, substituteAll, aurora-led, bash, coreutils
-, e2fsprogs, parted, ubootBananaPim64 }:
+{ lib
+, gitignoreSource
+, runCommand
+, substituteAll
+, aurora-led
+, bash
+, coreutils
+, e2fsprogs
+, parted
+, ubootBananaPim64
+}:
 
 { auroraLedDevice, channelUrl, target }:
 
