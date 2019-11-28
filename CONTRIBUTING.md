@@ -16,6 +16,10 @@ dismissed. Administrators must not waive any restrictions.
 
 See: https://nixos.org/nixpkgs/manual/#submitting-changes-making-patches
 
+## Formatting
+
+Use `find . -name \*.nix -exec nixpkgs-fmt {} +` inside `nix-shell`.
+
 ## Iterate on overlay packages
 
 First, enter `nix-shell`. This sets up reproducible development environment.

@@ -14,7 +14,7 @@
 
 let
   mkConfiguration = profile: substituteAll {
-    src = ./configuration.nix;
+    src = ./configuration.nix.in;
     inherit profile;
   };
 

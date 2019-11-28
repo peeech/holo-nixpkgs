@@ -4,7 +4,7 @@ with stdenv.lib;
 
 stdenv.mkDerivation {
   name = "holo-auth-client";
-	
+
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ python3 ];
 

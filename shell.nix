@@ -6,8 +6,8 @@ let
   root = toString ./.;
 in
 
-stdenvNoCC.mkDerivation {
-  name = "holo-nixpkgs";
+mkShell {
+  buildInputs = [ nixpkgs-fmt ];
 
   shellHook = ''
     holoportos-shell() {

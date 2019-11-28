@@ -6,8 +6,6 @@
     ../self-aware.nix
   ];
 
-  environment.systemPackages = [ pkgs.hello ];
-
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   nix.gc = {
