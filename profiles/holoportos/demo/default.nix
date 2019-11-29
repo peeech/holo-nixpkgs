@@ -34,6 +34,7 @@ in
   imports = [ ../. ];
 
   environment.systemPackages = [
+    pkgs.emacs26-nox
     pkgs.holo-keygen
     pkgs.hpos-state-gen-cli
     pkgs.holofuel-demo-configure # not needed, except on one "Holo, Ltd" node?
