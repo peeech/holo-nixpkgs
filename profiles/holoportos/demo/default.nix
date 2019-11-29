@@ -50,7 +50,7 @@ in
         {
           id = "host-agent";
           name = "Host Agent";
-          keystore_file = "${conductorHome}/holo";
+          keystore_file = "${conductorHome}/holo-keystore";
           public_address = "@public_key@";
         }
       ];
@@ -58,9 +58,9 @@ in
       dnas = map dnaConfig dnas;
       instances = map instanceConfig dnas;
       network = {
-        bootstrap_nodes = [];
+        type = "sim2h";
+        sim2h_url = "wss://sim2h.holochain.org:9000";
         n3h_persistence_path = "${conductorHome}/.n3h";
-        type = "n3h";
       };
       persistence_dir = conductorHome;
       signing_service_uri = "http://localhost:8888";
