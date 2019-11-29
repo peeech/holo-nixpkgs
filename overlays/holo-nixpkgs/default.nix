@@ -196,11 +196,6 @@ in
     python3 = python3.withPackages (ps: [ ps.requests ]);
   };
 
-  # TODO: upstream to holochain-cli
-  holo-keygen = callPackage ./holo-keygen {
-    stdenv = stdenvNoCC;
-  };
-
   holo-nixpkgs-tests = recurseIntoAttrs (
     import ../../tests {
       inherit pkgs;
