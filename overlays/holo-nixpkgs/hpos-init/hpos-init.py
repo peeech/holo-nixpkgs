@@ -2,6 +2,7 @@ from glob import glob
 from twisted.internet import reactor
 from twisted.internet.defer import inlineCallbacks
 import json
+import logging
 import os
 import subprocess
 import time
@@ -55,5 +56,6 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
     main()
     reactor.run()
