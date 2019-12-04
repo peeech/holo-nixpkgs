@@ -46,7 +46,12 @@ in
             || [ ! -s holo-keystore ] || [ ! -s holo-keystore.pub ]; then
           # Not yet authorized w/ Zerotier, or the derived keystore is missing/empty
           echo >&2 "Running HPOS init..."
-          export HPOS_STATE_PATH=$(hpos-init)
+          while ! HPOS_STATE_PATH=$(hpos-init) || [ -z "$HPOS_STATE_PATH" ]; do
+            # Perhaps receiving/parsing/saving hpos-state.json failed/empty; try again...
+            echo >&2 "Failed to acheive HPOS Init; retrying..."
+          done
+          export HPOS_STATE_PATH
+          echo >&2 "HPOS Init successful, with path $HPOS_STATE_PATH"
 
           mkdir -p /var/lib/holochain-conductor
           cd /var/lib/holochain-conductor
