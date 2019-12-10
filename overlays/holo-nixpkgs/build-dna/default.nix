@@ -8,8 +8,6 @@
 , holochain-cli
 , jq
 , lld
-, nodejs
-, python2
 , which
 }:
 { name, src, nativeBuildInputs ? [], doCheck ? true, shell ? false }:
@@ -47,8 +45,6 @@ let
     ln -s ${holochain-rust} $out/holochain-rust
   '';
 
-  testDir = "${this}/test";
-
   fetchZomeDeps = name: ''
     ln -s ${cargoToNix "${this}/zomes/${name}/code"} vendor
   '';
@@ -69,8 +65,6 @@ rustPlatform.buildRustPackage (
       holochainRust.holochain-conductor
       jq
       lld
-      nodejs
-      python2
       which
     ];
 
@@ -94,17 +88,6 @@ rustPlatform.buildRustPackage (
 
       runHook postBuild
     '';
-
-    checkPhase = ''
-      runHook preCheck
-    '' + optionalString (pathExists (stripContext testDir)) ''
-      cp -r ${npmToNix { src = testDir; }} test/node_modules
-      hc test
-    '' + ''
-      runHook postCheck
-    '';
-
-    inherit doCheck;
 
     installPhase = ''
       runHook preInstall

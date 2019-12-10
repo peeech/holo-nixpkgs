@@ -9,6 +9,4 @@ let
   };
 in
 
-(callPackage src {}).servicelogger.overrideAttrs (super: {
-  doCheck = false;
-})
+(callPackage src {}).servicelogger
