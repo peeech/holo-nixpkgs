@@ -167,12 +167,9 @@ in
     ''
   );
 
-  dnaPackages = recurseIntoAttrs {
-    happ-store = callPackage ./dna-packages/happ-store {};
-    holo-hosting-app = callPackage ./dna-packages/holo-hosting-app {};
-    holofuel = callPackage ./dna-packages/holofuel {};
-    servicelogger = callPackage ./dna-packages/servicelogger {};
-  };
+  dnaPackages = recurseIntoAttrs (
+    import ./dna-packages final previous
+  );
 
   aurora-led = callPackage ./aurora-led {};
 
@@ -302,6 +299,10 @@ in
   };
 
   wrangler = callPackage ./wrangler {};
+
+  wrapDNA = drv: runCommand (lib.removeSuffix ".dna.json" drv.name) {} ''
+    install -Dm -x ${drv} $out/${drv.name}
+  '';
 
   zerotierone = previous.zerotierone.overrideAttrs (
     super: {
