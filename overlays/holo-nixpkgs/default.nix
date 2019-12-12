@@ -114,7 +114,6 @@ in
 
   buildDNA = makeOverridable (
     callPackage ./build-dna {
-      inherit (llvmPackages_8) lld;
       inherit (rust.packages.nightly) rustPlatform;
     }
   );

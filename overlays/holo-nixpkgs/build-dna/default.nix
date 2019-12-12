@@ -6,7 +6,6 @@
 , runCommand
 , rustPlatform
 , holochain-cli
-, lld
 , nodejs
 , which
 }:
@@ -49,7 +48,6 @@ rustPlatform.buildRustPackage (
       holochainPackages.holochain-cli
       holochainPackages.holochain-conductor
       holochainPackages.sim2h-server
-      lld
       nodejs
       which
     ];
@@ -66,8 +64,6 @@ rustPlatform.buildRustPackage (
     preConfigure = ''
       ln -s ${cargoToNix this} vendor
     '';
-
-    RUSTFLAGS = "-C linker=lld";
 
     buildPhase = ''
       runHook preBuild
