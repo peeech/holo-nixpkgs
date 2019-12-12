@@ -3,10 +3,11 @@ final: previous:
 with final;
 
 let
-  happ-store = fetchurl {
-    url = "https://github.com/holochain/happ-store/releases/download/v0.4.1-alpha1/hApp-store.dna.json";
-    name = "happ-store.dna.json";
-    sha256 = "1y89q052y6nbm70akdb2qfbkc7yj73xla4qjw2lmk0b76g06l0r8";
+  happ-store = fetchFromGitHub {
+    owner = "holochain";
+    repo = "happ-store";
+    rev = "4e27b888810b45d706b2982f7d97aa454aaf74cf";
+    sha256 = "18h0x2m5vnmm1xz5k0j7rsc4il62vhq29qcl7wn1f9vmsfac2lrv";
   };
 
   holofuel = fetchurl {
@@ -30,9 +31,9 @@ let
 in
 
 {
-  inherit (callPackage servicelogger {}) servicelogger;
+  inherit (callPackage happ-store {}) happ-store;
 
-  happ-store = wrapDNA happ-store;
+  inherit (callPackage servicelogger {}) servicelogger;
 
   holofuel = wrapDNA holofuel;
 
