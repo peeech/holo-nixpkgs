@@ -16,10 +16,11 @@ let
     sha256 = "10xmq52m37r09flmsri64iwrpi9l88s9zmdl50l346ld6rxd0jf8";
   };
 
-  holo-hosting-app = fetchurl {
-    url = "https://github.com/Holo-Host/holo-hosting-app/releases/download/v0.4.1-alpha1/holo-hosting-app.dna.json";
-    name = "holo-hosting-app.dna.json";
-    sha256 = "0yxky5g6lb84g4zffqsmahdffz1drq9dqywsvgbzqxilwhsgm2cj";
+  holo-hosting-app = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "holo-hosting-app";
+    rev = "bbda39876d5bc206712fcbe27fdb5e405006e539";
+    sha256 = "0wf7133cam8s3m6hww5fk29343z2a0xf2qv764radx5pcr02lhs0";
   };
 
   servicelogger = fetchFromGitHub {
@@ -33,9 +34,9 @@ in
 {
   inherit (callPackage happ-store {}) happ-store;
 
+  inherit (callPackage holo-hosting-app {}) holo-hosting-app;
+
   inherit (callPackage servicelogger {}) servicelogger;
 
   holofuel = wrapDNA holofuel;
-
-  holo-hosting-app = wrapDNA holo-hosting-app;
 }
