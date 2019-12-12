@@ -42,8 +42,8 @@ let
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
-    rev = "e33624e0e3cb23158212590ee89d6aaa7ca86e2e";
-    sha256 = "1bjkl623r0y2ybibnxma2j1mp8rhr3zwav96f9jq34f2vqyw0vj8";
+    rev = "b2767ed40e47d45c2f76578b9f28428834bb242b";
+    sha256 = "1zik13gim33441lafw3mnp4q56n28v9zi7v93sh2vfx6wff36sxq";
   };
 
   hp-admin = fetchFromGitHub {
@@ -282,8 +282,8 @@ in
         rustc = (
           rustChannelOf {
             channel = "nightly";
-            date = "2019-07-14";
-            sha256 = "1llbwkjkjis6rv0rbznwwl0j6bf80j38xgwsd4ilcf0qps4cvjsx";
+            date = "2019-11-16";
+            sha256 = "17l8mll020zc0c629cypl5hhga4hns1nrafr7a62bhsp4hg9vswd";
           }
         ).rust.override {
           targets = [
