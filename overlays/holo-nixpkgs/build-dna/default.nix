@@ -82,5 +82,7 @@ rustPlatform.buildRustPackage (
 
       runHook postInstall
     '';
+
+    meta.platforms = [ "x86_64-linux" ];
   }
 )
