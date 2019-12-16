@@ -42,8 +42,8 @@ let
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
-    rev = "fa1682dc1827f28695f6e9af8f3fb41f1b3354da";
-    sha256 = "10sl1p45pdz0ddfcdg3vy334yc0nyhlqp4g0pcipv712915rvkiq";
+    rev = "d3c1dd21aae200d126b9a4b5041abdd14a8b295d";
+    sha256 = "1ip8m7sksb66iwpvhy3mgsxvar92dscki3b12cax2w9wmcmpbmqf";
   };
 
   hp-admin = fetchFromGitHub {
