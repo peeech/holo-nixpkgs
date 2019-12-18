@@ -231,10 +231,7 @@ in
     python3 = python3.withPackages (ps: [ ps.click ps.requests ]);
   };
 
-  hpos-init = callPackage ./hpos-init {
-    stdenv = stdenvNoCC;
-    python3 = python3.withPackages (ps: [ ps.magic-wormhole ]);
-  };
+  hpos-init = callPackage ./hpos-init {};
 
   hpos-led-daemon = callPackage ./hpos-led-daemon {};
 

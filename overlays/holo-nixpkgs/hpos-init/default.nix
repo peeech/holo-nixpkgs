@@ -1,17 +1,12 @@
-{ stdenv, makeWrapper, python3 }:
-
-with stdenv.lib;
-
-stdenv.mkDerivation rec {
+{ lib, python3Packages }:
+with lib;
+python3Packages.buildPythonApplication rec {
   name = "hpos-init";
 
-  nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ python3 ];
-
-  buildCommand = ''
-    makeWrapper ${python3}/bin/python3 $out/bin/${name} \
-      --add-flags ${./hpos-init.py}
-  '';
+  src = ./.;  
+  propagatedBuildInputs = with python3Packages; [ magic-wormhole ];
+  doCheck = false;
 
   meta.platforms = platforms.linux;
+  
 }
