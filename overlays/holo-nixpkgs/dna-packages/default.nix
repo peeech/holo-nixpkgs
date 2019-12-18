@@ -32,6 +32,13 @@ let
     sha256 = "1hbywvgm69hxjzkpaxx6lj2anvjqp04y00b4iz4fb8bag7sa80kx";
   };
 
+  hylo-holo-dnas = fetchFromGitHub {
+    owner = "holochain";
+    repo = "hylo-holo-dnas";
+    rev = "b1d07d4669a7c0e317de2cf0034960fc094e19b1";
+    sha256 = "1hn1x16a7lxrp879vxg8imd5l7kkvg1pdqb9fr1v2jjcfdx7j943";
+  };
+
   servicelogger = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "servicelogger";
