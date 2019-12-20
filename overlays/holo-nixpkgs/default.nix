@@ -35,15 +35,15 @@ let
   holo-router = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "holo-router";
-    rev = "69dc3a0fe42ff4df1777766afa390594da20f7f4";
-    sha256 = "10i7nlhk6azshxl95dq3c9q083mrk7k6crl49y72dqp5mjpik67k";
+    rev = "3704386fb78868328eaf1ba516028f0317cc4926";
+    sha256 = "0f9kdqw13w7ypydlbv32g029923xq6x9s71295bjwsb8il8a2cm3";
   };
 
   holochain-rust = fetchFromGitHub {
     owner = "holochain";
     repo = "holochain-rust";
-    rev = "e33624e0e3cb23158212590ee89d6aaa7ca86e2e";
-    sha256 = "1bjkl623r0y2ybibnxma2j1mp8rhr3zwav96f9jq34f2vqyw0vj8";
+    rev = "5c2666adee3b75704cdcbd17fd3c1bcc884c827b";
+    sha256 = "15ds4bl3ck2rpmlf60dgysd3fypa5lvrzdygy87l5mzgl72ryj7d";
   };
 
   hp-admin = fetchFromGitHub {
@@ -56,15 +56,15 @@ let
   hp-admin-crypto = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hp-admin-crypto";
-    rev = "1e9d8fad9382343153497ff2a673f62357dfa066";
-    sha256 = "0ssxra8i7kx7bp6mjs6rmi24qj3jf6zrqp4kz5x0sbqxah23742p";
+    rev = "357177ae67d9e3d94ac82566f7c025eeea090e25";
+    sha256 = "06vc13v34sjvvng426vkwzxr9v38ajywwxg0imjdghj83fh6rc0k";
   };
 
   hpos-state = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hpos-state";
-    rev = "62009eeb1fe9be9bb455d3a763acb31a71cf7679";
-    sha256 = "0n8kb0ph3kvyjmqs8jxpg5s82al650cdf0fsp0c8ai2q00ig8gjl";
+    rev = "940c2662153387eea27c691304415c0f94e44d33";
+    sha256 = "0524frjjd2qazjpkfn4fvp39a9lxjlwghx20lw7a8lbhc4nfvd67";
   };
 
   nixpkgs-mozilla = fetchTarball {
@@ -285,8 +285,8 @@ in
         rustc = (
           rustChannelOf {
             channel = "nightly";
-            date = "2019-07-14";
-            sha256 = "1llbwkjkjis6rv0rbznwwl0j6bf80j38xgwsd4ilcf0qps4cvjsx";
+            date = "2019-11-16";
+            sha256 = "17l8mll020zc0c629cypl5hhga4hns1nrafr7a62bhsp4hg9vswd";
           }
         ).rust.override {
           targets = [
