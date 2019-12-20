@@ -7,29 +7,29 @@ let
   happ-example = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "happ-example";
-    rev = "702c75540eda33637f0a66a0a85413977a9e0e29";
-    sha256 = "0izpwfknn4g9jx9r9686nhwj5v5wdg0s7hn4qrm3lpwdh89sgg7k";
+    rev = "ddcfae9a160f0a7297e7e3d571eedec7e24a4ff6";
+    sha256 = "0y0f8jysj8lfnd93lkjb1y4cwxl09klfyxcx2ywcqqpsm1nxg5sm";
   };
 
   happ-store = fetchFromGitHub {
     owner = "holochain";
     repo = "happ-store";
-    rev = "ea424725f4ae4be51d40e4d34264c1b331fbf40f";
-    sha256 = "19znqa6n56kpbgdw5dkkdj98h5v02j1dlry2iqcblkpmldavq7f1";
+    rev = "4c2ce2e7f2e4801e12daa5799200dcd4a8ee0f76";
+    sha256 = "1qv14yijcpx44f2k4xndqbs6y5qsz5ismzbh38h3i920dqlf7vsf";
   };
 
   holo-communities-dna = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "holo-communities-dna";
-    rev = "3452a0f2fcc70e8e5f220577b6aa9dcc0c864b8e";
-    sha256 = "1qa9q17aab3h0k4npjkrph4j0wvx05dxkfjrc8bfy4z8ljgfd4pa";
+    rev = "5844e19bf70d9df80cc0c8fceae084eb62168561";
+    sha256 = "0hay631mrddnjvswa9f3i8py1z7zk9pxwrs8ghch3kgyk2pyh3fn";
   };
 
   holo-hosting-app = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "holo-hosting-app";
-    rev = "e23cadc68dda3ba05dcb94c263ec5327cdd7381b";
-    sha256 = "02h5sf9wj6sbin6k46mzrrmdxj8m2izn9xr0i56li8ljpmm2prs7";
+    rev = "7c0ff3a338f8ebd9d41755debdf28c607378059d";
+    sha256 = "0ksil9rsd6yrlizxilimy0zi9ajgwhkng5m0zdkazgpp1762qim9";
   };
 
   holofuel = fetchurl {
@@ -41,8 +41,8 @@ let
   servicelogger = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "servicelogger";
-    rev = "b9d447d8b5c600f4dbf367493572e128556cb49f";
-    sha256 = "050zpkbc5z94ddz28s5j2bj18k2jsv06g3b37krmgn3gabk04frf";
+    rev = "31395d5fc1a01e1ec6107941defcdc265fb9f4da";
+    sha256 = "1cb41kjknijj8ggmfpgf0dj4ki6s8vmlylb7b7775lj06jsdcnf6";
   };
 in
 

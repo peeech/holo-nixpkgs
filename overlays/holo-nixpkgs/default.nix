@@ -35,8 +35,8 @@ let
   holo-router = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "holo-router";
-    rev = "3704386fb78868328eaf1ba516028f0317cc4926";
-    sha256 = "0f9kdqw13w7ypydlbv32g029923xq6x9s71295bjwsb8il8a2cm3";
+    rev = "938c36ee6c879613debdcd5819ed7d4ed22a775d";
+    sha256 = "07mpmy68him0h9yqbrc6l142f23slj8mbyhfhy0frlywzkahll0y";
   };
 
   holochain-rust = fetchFromGitHub {
@@ -56,15 +56,15 @@ let
   hp-admin-crypto = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hp-admin-crypto";
-    rev = "357177ae67d9e3d94ac82566f7c025eeea090e25";
-    sha256 = "06vc13v34sjvvng426vkwzxr9v38ajywwxg0imjdghj83fh6rc0k";
+    rev = "2d4b9734be1dc66f1bdb08a19a995731d0c62c33";
+    sha256 = "1lkkxk24vwbgzx74axfcmhn9acwafbdkxb00wwfz3aa033zjr5kv";
   };
 
   hpos-state = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hpos-state";
-    rev = "940c2662153387eea27c691304415c0f94e44d33";
-    sha256 = "0524frjjd2qazjpkfn4fvp39a9lxjlwghx20lw7a8lbhc4nfvd67";
+    rev = "b12dd0a2bc02a2f8d770aa54c4b1078f96586957";
+    sha256 = "0zl18ip8zv5m8h4qx7cnp6indmg39k7s4wy3jmriw4fjj0385478";
   };
 
   nixpkgs-mozilla = fetchTarball {
