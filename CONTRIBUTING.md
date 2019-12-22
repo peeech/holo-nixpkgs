@@ -1,16 +1,13 @@
 ## Branch protection rules
 
 `develop` requires signed commits, passing CI and pull request with at least
-one review. Administrators may waive some of restrictions for individual pull
-requests.
-
-`staging` bears the same restrictions as `develop`, plus administrators must no
-longer waive any restrictions.
+one review. Code owners may waive some of restrictions for individual pull
+requests in special circumstances.
 
 `master` requires signed commits, passing CI and pull request with at least two
 reviews, both of which must be made against the most recent tip of the branch.
 If any, code owner reviews are mandatory. Change request reviews can't be
-dismissed. Administrators must not waive any restrictions.
+dismissed. Administrators or code owners must not waive any restrictions.
 
 ## Commit message style guide
 

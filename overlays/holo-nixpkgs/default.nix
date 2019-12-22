@@ -136,6 +136,27 @@ in
     in
       head (attrVals imageNames system);
 
+  mkBuildMatrix = scope:
+    lib.mapAttrs (_: pkgs: scope { inherit pkgs; });
+
+  mkJobsets = callPackage ./mk-jobsets {};
+
+  mkRelease = src: platforms:
+    let
+      buildMatrix = mkBuildMatrix (import src) platforms;
+    in
+    {
+      aggregate = releaseTools.channel {
+        name = "aggregate";
+        inherit src;
+
+        constituents = with lib;
+          concatMap (collect isDerivation) (attrValues buildMatrix);
+      };
+
+      platforms = buildMatrix;
+    };
+
   singletonDir = path:
     let
       drv = lib.toDerivation path;
@@ -201,11 +222,13 @@ in
 
   holo-cli = callPackage ./holo-cli {};
 
-  holo-nixpkgs-tests = recurseIntoAttrs (
-    import ../../tests {
-      inherit pkgs;
-    }
-  );
+  holo-nixpkgs = recurseIntoAttrs {
+    path = gitignoreSource ../..;
+
+    tests = recurseIntoAttrs (
+      import ../../tests { inherit pkgs; }
+    );
+  };
 
   holoportos = recurseIntoAttrs {
     profile = tryDefault <nixos-config> ../../profiles/holoportos;
@@ -271,6 +294,8 @@ in
       sun50i-a64-gpadc-iio = self.callPackage ./linux-packages/sun50i-a64-gpadc-iio {};
     }
   );
+
+  magic-wormhole-mailbox-server = python3Packages.callPackage ./magic-wormhole-mailbox-server {};
 
   nodejs = nodejs-12_x;
 
