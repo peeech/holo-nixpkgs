@@ -47,10 +47,7 @@ in
 
   environment.noXlibs = true;
 
-  environment.systemPackages = [
-    (holoport-hardware-test.override { inherit target; })
-    udevil
-  ];
+  environment.systemPackages = [ udevil ];
 
   networking.firewall.allowedTCPPorts = [ 443 ];
 

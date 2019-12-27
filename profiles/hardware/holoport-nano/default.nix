@@ -24,9 +24,8 @@
 
   boot.loader.grub.enable = false;
 
-  system.holoportos.led-daemon = {
-    device = "/dev/ttyS2";
-    operstate = "/sys/class/net/eth0/operstate";
+  services.hpos-led-manager = {
+    devicePath = "/dev/ttyS2";
   };
 
   system.holoportos.target = "holoport-nano";

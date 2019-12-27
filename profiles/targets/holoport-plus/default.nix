@@ -4,5 +4,5 @@
     ../../holoportos
   ];
 
-  system.holoportos.led-daemon.enable = true;
+  services.hpos-led-manager.enable = true;
 }

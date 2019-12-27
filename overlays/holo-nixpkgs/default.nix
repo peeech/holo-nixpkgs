@@ -4,6 +4,13 @@ with final;
 with lib;
 
 let
+  aorura = fetchFromGitHub {
+    owner = "Holo-Host";
+    repo = "aorura";
+    rev = "2aef90935d6e965cf6ec02208f84e4b6f43221bd";
+    sha256 = "00d9c6f0hh553hgmw01lp5639kbqqyqsz66jz35pz8xahmyk5wmw";
+  };
+
   cargo-to-nix = fetchFromGitHub {
     owner = "transumption-unstable";
     repo = "cargo-to-nix";
@@ -81,6 +88,11 @@ let
 in
 
 {
+  inherit (callPackage aorura {})
+    aorura-cli
+    aorura-emu
+    ;
+
   inherit (callPackage cargo-to-nix {})
     buildRustPackage
     cargoToNix
@@ -191,10 +203,6 @@ in
     import ./dna-packages final previous
   );
 
-  aurora-led = callPackage ./aurora-led {};
-
-  dnscrypt-proxy2 = callPackage ./dnscrypt-proxy2 {};
-
   extlinux-conf-builder = callPackage ./extlinux-conf-builder {};
 
   inherit (callPackage holo-envoy {}) holo-envoy;
@@ -204,12 +212,6 @@ in
     holochain-conductor
     sim2h-server
     ;
-
-  hclient = callPackage ./hclient {};
-
-  holofuel-app = callPackage ./holofuel-app {};
-
-  holoport-hardware-test = callPackage ./holoport-hardware-test {};
 
   holoport-nano-dtb = callPackage ./holoport-nano-dtb {
     linux = linux_latest;
@@ -259,7 +261,9 @@ in
     python3 = python3.withPackages (ps: [ ps.magic-wormhole ]);
   };
 
-  hpos-led-daemon = callPackage ./hpos-led-daemon {};
+  hpos-led-manager = callPackage ./hpos-led-manager {
+    inherit (rust.packages.nightly) rustPlatform;
+  };
 
   hpstatus = fetchFromGitHub {
     owner = "Holo-Host";

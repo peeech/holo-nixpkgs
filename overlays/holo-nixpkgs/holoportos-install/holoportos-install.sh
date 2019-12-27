@@ -6,15 +6,15 @@ PATH=@path@:$PATH
 function on_exit {
   # shellcheck disable=SC2181
   if (($?)); then
-    aurora-led --device @auroraLedDevice@ --mode flash --color red
+    aorura-cli @auroraLedDevice@ --set flash:red
   else
-    aurora-led --device @auroraLedDevice@ --mode static --color green
+    aorura-cli @auroraLedDevice@ --set static:green
   fi
 }
 
 trap on_exit EXIT
 
-aurora-led --device @auroraLedDevice@ --mode flash --color orange
+aorura-cli @auroraLedDevice@ --set flash:orange
 
 @prePhase@
 

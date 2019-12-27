@@ -99,13 +99,6 @@ in
       serverName = "chaperone.holo.host";
     };
 
-    virtualHosts.holofuel-demo = {
-      enableACME = true;
-      forceSSL = true;
-      root = pkgs.holofuel-app;
-      serverName = "holofuel-demo.holo.host";
-    };
-
     virtualHosts.hpstatus = {
       enableACME = true;
       forceSSL = true;

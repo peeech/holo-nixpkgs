@@ -31,7 +31,7 @@ in
 
     package = mkOption {
       default = pkgs.holoportos-install {
-        auroraLedDevice = config.system.holoportos.led-daemon.device;
+        auroraLedDevice = config.services.hpos-led-manager.devicePath;
         inherit (cfg) channelUrl;
         inherit target;
       };

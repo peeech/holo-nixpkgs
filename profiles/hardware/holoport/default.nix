@@ -8,9 +8,8 @@
     devices = [ "/dev/sda" ];
   };
 
-  system.holoportos.led-daemon = {
-    device = "/dev/ttyUSB0";
-    operstate = "/sys/class/net/enp1s0/operstate";
+  services.hpos-led-manager = {
+    devicePath = "/dev/ttyUSB0";
   };
 
   system.holoportos.target = "holoport";

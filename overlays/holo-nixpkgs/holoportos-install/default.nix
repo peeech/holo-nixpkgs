@@ -2,7 +2,7 @@
 , gitignoreSource
 , runCommand
 , substituteAll
-, aurora-led
+, aorura-cli
 , bash
 , coreutils
 , e2fsprogs
@@ -26,7 +26,7 @@ let
       mkdir $out && ln -s ${gitignoreSource ../../../.} $out/holo-nixpkgs;
     '';
     configuration = mkConfiguration profile;
-    path = lib.makeBinPath [ aurora-led coreutils e2fsprogs parted ];
+    path = lib.makeBinPath [ aorura-cli coreutils e2fsprogs parted ];
     inherit bash auroraLedDevice channelUrl prePhase postPhase;
   };
 
