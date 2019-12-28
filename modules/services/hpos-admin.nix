@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
     systemd.services.hpos-admin = {
-      environment.HPOS_STATE_PATH = "/etc/hpos-state.json";
+      environment.HPOS_STATE_PATH = "/etc/hpos-config.json";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
 

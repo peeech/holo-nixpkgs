@@ -103,7 +103,7 @@ in
     virtualHosts.quickstart = {
       enableACME = true;
       forceSSL = true;
-      root = pkgs.hpos-state-gen-web;
+      root = pkgs.hpos-config-gen-web;
       serverName = "quickstart.holo.host";
       extraConfig = ''
         types {

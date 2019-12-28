@@ -1,4 +1,4 @@
-{ makeTest, lib, hpos-admin-client, hpos-state-gen-cli }:
+{ makeTest, lib, hpos-admin-client, hpos-config-gen-cli }:
 
 makeTest {
   name = "hpos-admin";
@@ -10,7 +10,7 @@ makeTest {
 
     environment.systemPackages = [
       hpos-admin-client
-      hpos-state-gen-cli
+      hpos-config-gen-cli
     ];
 
     services.hpos-admin.enable = true;
@@ -27,7 +27,7 @@ makeTest {
     startAll;
 
     $machine->succeed(
-      "hpos-state-gen-cli --email test\@holo.host --password : --seed-from ${./seed.txt} > /etc/hpos-state.json"
+      "hpos-config-gen-cli --email test\@holo.host --password : --seed-from ${./seed.txt} > /etc/hpos-config.json"
     );
 
     $machine->systemctl("start hpos-admin.service");

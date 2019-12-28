@@ -20,7 +20,7 @@ def get_config_inner(ctx):
     return request(ctx, 'GET', '/v1/config').json()
 
 
-@cli.command(help='Get hpos-state.json v1.config')
+@cli.command(help='Get hpos-config.json v1.config')
 @click.pass_context
 def get_config(ctx):
     print(get_config_inner(ctx))
@@ -31,7 +31,7 @@ def cas_hash(data):
     return b64encode(sha512(dump.encode()).digest()).decode()
 
 
-@cli.command(help='Set hpos-state.json v1.config and trigger NixOS rebuild')
+@cli.command(help='Set hpos-config.json v1.config and trigger NixOS rebuild')
 @click.argument('k')
 @click.argument('v')
 @click.pass_context
