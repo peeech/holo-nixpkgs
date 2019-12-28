@@ -256,8 +256,8 @@ in
   hpstatus = fetchFromGitHub {
     owner = "Holo-Host";
     repo = "hpstatus";
-    rev = "005435217305f76f3d51722f462f310a2baeab11";
-    sha256 = "1gszq98xdvq515g2kaxan886p4cgmwgqmb0g7b9a66m5087p3jg4";
+    rev = "562c637f7fa370633998efa319ae1225d7241537";
+    sha256 = "1wm744mavp7k9ajikzm3hg01byc58s9dfwsmy47j1mhzc0j0l2fr";
   };
 
   hydra = previous.hydra.overrideAttrs (
